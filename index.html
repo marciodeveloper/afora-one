@@ -682,7 +682,7 @@
   <script>
     (function(){
       const $ = function(selector,root){return (root||document).querySelector(selector)};
-      const $ = function(selector,root){return Array.from((root||document).querySelectorAll(selector))};
+      const selectAll = function(selector,root){return Array.from((root||document).querySelectorAll(selector))};
       const LANGUAGE_KEY = "aforaone.language";
       const COUNTRY_CACHE_KEY = "aforaone.country";
       let language = "pt";
@@ -925,7 +925,7 @@
         mobileToggle.setAttribute("aria-expanded",String(open));
         mobileToggle.textContent=open?"×":"☰";
       });
-      $$("#mainNav a").forEach(function(link){link.addEventListener("click",function(){nav.classList.remove("open");mobileToggle.setAttribute("aria-expanded","false");mobileToggle.textContent="☰"})});
+      selectAll("#mainNav a").forEach(function(link){link.addEventListener("click",function(){nav.classList.remove("open");mobileToggle.setAttribute("aria-expanded","false");mobileToggle.textContent="☰"})});
 
       const marketSelect=$("#marketSelect");
       const searchMarket=$("#searchMarket");
@@ -935,7 +935,7 @@
         notify(value==="all"?(language==="pt"?"Exibindo todos os mercados.":"Showing all markets."):(language==="pt"?"Destino selecionado: "+marketName(value)+".":"Selected destination: "+marketName(value)+"."));
       }
       marketSelect.addEventListener("change",function(){searchMarket.value=marketSelect.value;});
-      $$(".destination").forEach(function(card){
+      selectAll(".destination").forEach(function(card){
         card.addEventListener("click",function(){
           const market=card.getAttribute("data-market-pick");
           chooseMarket(market);
@@ -945,7 +945,7 @@
       });
 
       let activeCategory="all";
-      const cards=$$(".listing-card");
+      const cards=selectAll(".listing-card");
       const count=$("#resultCount");
       const empty=$("#emptyState");
       function applyFilters(){
@@ -963,9 +963,9 @@
         count.textContent=language==="pt"?visible.toString().padStart(2,"0")+" resultado(s) encontrado(s)":visible.toString().padStart(2,"0")+" result(s) found";
         empty.style.display=visible?"none":"block";
       }
-      $$(".filter-btn").forEach(function(btn){
+      selectAll(".filter-btn").forEach(function(btn){
         btn.addEventListener("click",function(){
-          $$(".filter-btn").forEach(function(item){item.classList.remove("active")});
+          selectAll(".filter-btn").forEach(function(item){item.classList.remove("active")});
           btn.classList.add("active");
           activeCategory=btn.dataset.filter;
           applyFilters();
@@ -973,14 +973,14 @@
       });
       $("#searchBtn").addEventListener("click",function(){
         activeCategory="all";
-        $$(".filter-btn").forEach(function(item){item.classList.toggle("active",item.dataset.filter==="all")});
+        selectAll(".filter-btn").forEach(function(item){item.classList.toggle("active",item.dataset.filter==="all")});
         applyFilters();
         $("#marketplace").scrollIntoView({behavior:"smooth"});
       });
       $("#searchInput").addEventListener("keydown",function(event){if(event.key==="Enter")$("#searchBtn").click()});
       searchMarket.addEventListener("change",applyFilters);
 
-      $$(".favorite-btn").forEach(function(button){
+      selectAll(".favorite-btn").forEach(function(button){
         button.addEventListener("click",function(event){
           event.stopPropagation();
           const saved=button.classList.toggle("saved");
@@ -992,13 +992,13 @@
       const detailModal=$("#detailModal");
       const signupModal=$("#signupModal");
       function openModal(modal){modal.classList.add("open");document.body.classList.add("modal-open")}
-      function closeModals(){ $$(".modal-backdrop").forEach(function(modal){modal.classList.remove("open")});document.body.classList.remove("modal-open")}
-      $$("[data-close]").forEach(function(button){button.addEventListener("click",closeModals)});
-      $$(".modal-backdrop").forEach(function(backdrop){backdrop.addEventListener("click",function(event){if(event.target===backdrop)closeModals()})});
+      function closeModals(){ selectAll(".modal-backdrop").forEach(function(modal){modal.classList.remove("open")});document.body.classList.remove("modal-open")}
+      selectAll("[data-close]").forEach(function(button){button.addEventListener("click",closeModals)});
+      selectAll(".modal-backdrop").forEach(function(backdrop){backdrop.addEventListener("click",function(event){if(event.target===backdrop)closeModals()})});
       document.addEventListener("keydown",function(event){if(event.key==="Escape")closeModals()});
-      $$("[data-open-signup]").forEach(function(button){button.addEventListener("click",function(event){event.preventDefault();openModal(signupModal)})});
+      selectAll("[data-open-signup]").forEach(function(button){button.addEventListener("click",function(event){event.preventDefault();openModal(signupModal)})});
 
-      $$("[data-detail]").forEach(function(button){
+      selectAll("[data-detail]").forEach(function(button){
         button.addEventListener("click",function(){
           const card=button.closest(".listing-card");
           const image=$("img",card);
@@ -1012,7 +1012,7 @@
           openModal(detailModal);
         });
       });
-      $$("[data-contact],[data-community],[data-business],[data-apply]").forEach(function(button){
+      selectAll("[data-contact],[data-community],[data-business],[data-apply]").forEach(function(button){
         button.addEventListener("click",function(event){
           event.preventDefault();
           closeModals();
@@ -1035,8 +1035,8 @@
         const observer=new IntersectionObserver(function(entries){
           entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}});
         },{threshold:.08});
-        $$(".reveal").forEach(function(element){observer.observe(element)});
-      }else{$$(".reveal").forEach(function(element){element.classList.add("visible")})}
+        selectAll(".reveal").forEach(function(element){observer.observe(element)});
+      }else{selectAll(".reveal").forEach(function(element){element.classList.add("visible")})}
       const savedLanguage=readStoredValue(LANGUAGE_KEY);
       const cachedCountry=getCachedCountry();
       if(cachedCountry) detectedCountry=cachedCountry;
