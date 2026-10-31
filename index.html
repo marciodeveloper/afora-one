@@ -2,12 +2,40 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
+  <script>
+    (function () {
+      try {
+        const override = localStorage.getItem("aforaone.language");
+        const cached = JSON.parse(localStorage.getItem("aforaone.country") || "null");
+        const code = cached && /^[A-Z]{2}$/.test(cached.code) && Date.now() - cached.savedAt < 43200000 ? cached.code : null;
+        const initial = override === "pt" || override === "en" ? override : (code ? (code === "BR" ? "pt" : "en") : (/^pt-BR$/i.test(navigator.language || "") ? "pt" : "en"));
+        document.documentElement.lang = initial === "pt" ? "pt-BR" : "en";
+      } catch (_) {}
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0B1F38">
-  <meta name="description" content="AforaONE conecta pessoas, negócios, serviços, oportunidades e comunidade para brasileiros que vivem pelo mundo. Um só ecossistema, sem fronteiras.">
+  <meta name="description" content="AforaONE conecta pessoas, negócios, serviços, oportunidades e comunidade para brasileiros em qualquer lugar do mundo. Um só ecossistema, sem fronteiras.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://marciodeveloper.github.io/afora-one/">
+  <meta property="og:site_name" content="AforaONE">
   <meta property="og:title" content="AforaONE — Um só ecossistema, sem fronteiras">
-  <meta property="og:description" content="Seu próximo capítulo começa aqui. Pessoas, oportunidades, negócios e comunidade em um só lugar.">
+  <meta property="og:description" content="Conexão, oportunidades e comunidade para brasileiros em qualquer lugar do mundo. Um só ecossistema, sem fronteiras.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://marciodeveloper.github.io/afora-one/">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image" content="https://marciodeveloper.github.io/afora-one/assets/aforaone-social-preview.png">
+  <meta property="og:image:secure_url" content="https://marciodeveloper.github.io/afora-one/assets/aforaone-social-preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AforaONE — Um só ecossistema, sem fronteiras">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AforaONE — Um só ecossistema, sem fronteiras">
+  <meta name="twitter:description" content="Conexão, oportunidades e comunidade para brasileiros em qualquer lugar do mundo.">
+  <meta name="twitter:image" content="https://marciodeveloper.github.io/afora-one/assets/aforaone-social-preview.png">
+  <meta name="twitter:image:alt" content="AforaONE — Um só ecossistema, sem fronteiras">
   <title>AforaONE — Um só ecossistema, sem fronteiras</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,6 +84,10 @@
     .main-nav a{font-size:12px;color:#526071;font-weight:600;transition:color .2s}
     .main-nav a:hover,.main-nav a.active{color:var(--navy)}
     .nav-actions{display:flex;align-items:center;gap:12px}
+    .locale-indicator{display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:#647181;font-size:10px;font-weight:800;white-space:nowrap;background:rgba(255,255,255,.38)}
+    .locale-indicator img{width:20px;height:15px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(11,31,56,.12)}
+    .locale-country{display:inline-block;max-width:105px;overflow:hidden;text-overflow:ellipsis}
+    .country-globe{width:20px;text-align:center;color:#B38A49;font-size:15px;line-height:1}
     .market-select{appearance:none;border:1px solid var(--line);background:transparent;border-radius:999px;padding:10px 32px 10px 14px;color:var(--navy);font-size:11px;font-weight:700;max-width:148px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230B1F38' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
     .lang-btn{border:0;background:transparent;color:#697483;font-size:10px;font-weight:800;letter-spacing:.08em;padding:8px}
     .lang-btn span{color:var(--gold)}
@@ -288,7 +320,7 @@
       .container{width:min(100% - 38px,var(--wide))}
       .nav-wrap{height:72px}.main-nav{display:none;position:absolute;top:72px;left:0;right:0;padding:18px 22px 24px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 20px 30px rgba(11,31,56,.08);flex-direction:column;align-items:flex-start;gap:19px}
       .main-nav.open{display:flex}.main-nav a{font-size:13px}
-      .nav-actions .market-select,.nav-actions .lang-btn{display:none}.nav-actions>.btn{display:none}.mobile-toggle{display:block}
+      .nav-actions .market-select{display:none}.nav-actions .lang-btn{display:inline-flex}.nav-actions>.btn{display:none}.nav-actions{gap:7px}.locale-indicator{padding:7px;gap:0}.locale-country{display:none}.mobile-toggle{display:block}
       .hero-inner{grid-template-columns:1fr;min-height:unset;padding-top:70px;padding-bottom:115px}
       .hero-copy{padding:0}.hero h1{font-size:clamp(52px,11vw,78px);max-width:600px}
       .hero-visual{height:400px;margin-top:10px}.visual-core{width:215px;height:215px}
@@ -376,6 +408,11 @@
           <option value="Irlanda">Irlanda</option>
           <option value="Espanha">Espanha</option>
         </select>
+        <span class="locale-indicator" id="localeIndicator" role="status" aria-live="polite" title="País de acesso">
+          <span class="country-globe" id="countryGlobe" aria-hidden="true">◎</span>
+          <img id="countryFlag" alt="" width="20" height="15" hidden>
+          <span class="locale-country" id="countryName">Detectando país</span>
+        </span>
         <button class="lang-btn" id="langToggle" type="button" aria-label="Mudar idioma">PT <span>/</span> EN</button>
         <button class="btn btn-dark" data-open-signup type="button">Entrar <span class="btn-arrow">↗</span></button>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu" aria-expanded="false" type="button">☰</button>
@@ -645,7 +682,234 @@
   <script>
     (function(){
       const $ = function(selector,root){return (root||document).querySelector(selector)};
-      const $$ = function(selector,root){return Array.from((root||document).querySelectorAll(selector))};
+      const $ = function(selector,root){return Array.from((root||document).querySelectorAll(selector))};
+      const LANGUAGE_KEY = "aforaone.language";
+      const COUNTRY_CACHE_KEY = "aforaone.country";
+      let language = "pt";
+      let detectedCountry = null;
+      let countryResolved = false;
+
+      const TEXT_TRANSLATIONS = {
+        "·  Ambiente demonstrativo — todos os perfis, anúncios e indicadores são fictícios":"· Demo environment — all profiles, listings and metrics are fictional",
+        "Um só ecossistema":"One ecosystem","sem fronteiras":"without borders","Explorar":"Explore","Comunidade":"Community","Negócios":"Business","Oportunidades":"Opportunities",
+        "Todos os mercados":"All markets","Estados Unidos":"United States","Reino Unido":"United Kingdom","Entrar":"Sign in",
+        "Pessoas":"People","Pertencimento":"Belonging","Novas conexões":"New connections","Além das fronteiras":"Beyond borders","Oportunidades reais":"Real opportunities",
+        "Em diferentes mercados":"Across markets","Seu lugar no mundo":"Your place in the world","Uma comunidade que aproxima":"A community that brings us closer",
+        "Ecossistema global":"Global ecosystem","Uma plataforma. Muitas possibilidades.":"One platform. Many possibilities.","mercados":"markets","idiomas":"languages","pilares integrados":"connected pillars",
+        "Todos os destinos":"All destinations","Conexões pelo mundo":"Connections around the world","Explore novos":"Explore new","horizontes.":"horizons.",
+        "Encontre comunidades, serviços e oportunidades nos destinos que fazem parte da sua jornada — ou descubra um novo lugar para começar.":"Find communities, services and opportunities in the destinations that are part of your journey — or discover a new place to begin.",
+        "Europa · 01":"Europe · 01","América do Norte · 02":"North America · 02","Europa · 03":"Europe · 03","América do Norte · 04":"North America · 04","Europa · 05":"Europe · 05",
+        "Lisboa, Porto, Braga e além":"Lisbon, Porto, Braga and beyond","Miami, Orlando, Boston e NYC":"Miami, Orlando, Boston and NYC","Londres, Manchester e região":"London, Manchester and the surrounding area",
+        "Toronto, Montreal e Vancouver":"Toronto, Montreal and Vancouver","Dublin, Cork e Galway":"Dublin, Cork and Galway",
+        "Marketplace AforaONE":"AforaONE Marketplace","O que você precisa.":"What you need.","Mais perto de você.":"Closer to you.",
+        "De um novo endereço a um profissional de confiança: descubra o que a comunidade oferece em cada destino.":"From a new home to a trusted professional: discover what the community has to offer in every destination.",
+        "Tudo":"Everything","Moradia":"Housing","Serviços":"Services","Produtos":"Products","Aulas":"Classes","04 oportunidades em destaque":"04 featured opportunities",
+        "Destaque":"Featured","Lisboa · Portugal":"Lisbon · Portugal","Apartamento T1 com luz natural":"Bright one-bedroom apartment","Mobiliado, perto do metrô e pronto para morar.":"Furnished, close to the metro and ready to move in.",
+        "/ mês":"/ month","Ver detalhes ↗":"View details ↗","Perfil profissional":"Professional profile","Miami · Estados Unidos":"Miami · United States",
+        "Consultoria fiscal para brasileiros":"Tax consulting for Brazilians","Orientação tributária para quem vive entre países.":"Tax guidance for people living across borders.","/ sessão":"/ session",
+        "Boa oportunidade":"Great find","Londres · Reino Unido":"London · United Kingdom","Bicicleta urbana em ótimo estado":"City bike in excellent condition","Revisada recentemente. Ideal para o dia a dia.":"Recently serviced. Ideal for everyday use.",
+        "/ único":"/ one-time","Toronto · Canadá":"Toronto · Canada","Inglês para a vida real":"English for real life","Aulas em pequenos grupos, com foco em conversação.":"Small-group classes focused on conversation.","/ aula":"/ class",
+        "Não encontramos resultados com esses filtros. Experimente outra busca ou destino.":"No results match these filters. Try another search or destination.",
+        "Dados fictícios para demonstração do protótipo":"Fictional data for prototype demonstration","Mais que uma plataforma":"More than a platform","Cinco pilares.":"Five pillars.","Um só universo.":"One universe.",
+        "A AforaONE nasce para conectar as partes da vida fora do país — e transformar conexões isoladas em um ecossistema que faz sentido.":"AforaONE connects the different parts of life abroad — turning isolated connections into one ecosystem that makes sense.",
+        "Compre, venda, encontre serviços, moradia e soluções para o cotidiano.":"Buy, sell, find services, housing and everyday solutions.",
+        "Faça parte de grupos, troque experiências e encontre pessoas que entendem sua jornada.":"Join groups, share experiences and meet people who understand your journey.",
+        "Descubra empresas e profissionais brasileiros em diferentes mercados.":"Discover Brazilian businesses and professionals across markets.",
+        "Encontre trabalho, projetos e caminhos para o próximo passo.":"Find jobs, projects and new paths for your next step.",
+        "Conteúdo, informação e histórias que ampliam seus horizontes.":"Content, insights and stories that broaden your horizons.",
+        "Community / Pertencimento":"Community / Belonging","Você não precisa":"You don't have to","fazer tudo":"do it all","sozinho.":"alone.",
+        "Uma rede de pessoas que compartilham experiências, respondem dúvidas e ajudam a transformar um lugar novo em um lugar seu.":"A network of people who share experiences, answer questions and help turn a new place into your place.",
+        "Conexão que acolhe":"Connection that welcomes","O mundo fica menor quando":"The world feels smaller when","a gente se encontra.":"we meet.",
+        "Da primeira semana em um novo país às conquistas de uma vida inteira: compartilhe, pergunte, descubra e participe.":"From your first week in a new country to lifelong milestones: share, ask, discover and take part.",
+        "Entrar na comunidade":"Join the community","Lisboa, Portugal · Grupo: Brasileiros em Lisboa":"Lisbon, Portugal · Group: Brazilians in Lisbon","há 18 min":"18 min ago",
+        "Cheguei há pouco e queria indicações de mercados com produtos brasileiros na região de Arroios. Toda dica é bem-vinda! 💛":"I arrived recently and would love recommendations for shops with Brazilian products around Arroios. Every tip is welcome! 💛",
+        "♡ 24 apoios":"♡ 24 likes","◌ 8 respostas":"◌ 8 replies","Participar ↗":"Join ↗",
+        "Orlando, Estados Unidos · Grupo: Empreender fora":"Orlando, United States · Group: Building a business abroad","há 1 h":"1 hour ago",
+        "Acabei de abrir meu pequeno negócio por aqui. Aprendi muito ouvindo quem já passou pelo mesmo caminho. Se alguém precisar trocar ideia, chama!":"I just opened my small business here. Listening to people who have been through the same journey taught me a lot. Reach out if you'd like to exchange ideas!",
+        "♡ 41 apoios":"♡ 41 likes","◌ 12 respostas":"◌ 12 replies","Dublin, Irlanda · Grupo: Vida na Irlanda":"Dublin, Ireland · Group: Life in Ireland","ontem":"Yesterday",
+        "Uma dica para quem está chegando: organizem os documentos antes da mudança. Deixei um checklist no grupo para ajudar quem está nessa fase.":"A tip for anyone arriving soon: organize your documents before the move. I left a checklist in the group to help those at this stage.",
+        "♡ 36 apoios":"♡ 36 likes","◌ 15 respostas":"◌ 15 replies","Business / Rede empreendedora":"Business / Entrepreneur network",
+        "Talentos brasileiros.":"Brazilian talent.","Alcance global.":"Global reach.",
+        "Conheça negócios e profissionais que levam sua experiência, cultura e criatividade para diferentes partes do mundo.":"Meet businesses and professionals bringing their experience, culture and creativity to every corner of the world.",
+        "Gastronomia · Londres, Reino Unido":"Food & hospitality · London, United Kingdom","Café de origem, sabores brasileiros e encontros que aproximam culturas.":"Origin coffee, Brazilian flavors and gatherings that bring cultures together.",
+        "Negócio demonstrativo":"Demo business","Conhecer ↗":"Explore ↗","Design & tecnologia · Toronto, Canadá":"Design & technology · Toronto, Canada",
+        "Estratégia digital e experiências de marca para negócios em crescimento.":"Digital strategy and brand experiences for growing businesses.",
+        "Consultoria · Lisboa, Portugal":"Consulting · Lisbon, Portugal","Apoio documental e orientação para brasileiros em uma nova jornada.":"Document support and guidance for Brazilians starting a new journey.",
+        "Opportunities / Próximo capítulo":"Opportunities / Next chapter","Novos caminhos começam com":"New paths begin with","uma oportunidade.":"an opportunity.",
+        "Trabalho, projetos e conexões profissionais para quem quer construir, crescer e fazer acontecer em qualquer lugar do mundo.":"Jobs, projects and professional connections for people ready to build, grow and make things happen anywhere in the world.",
+        "Explorar oportunidades ↗":"Explore opportunities ↗","Tecnologia · Remoto":"Technology · Remote","Desenvolvedor Full-stack":"Full-stack Developer",
+        "Empresa internacional · Lisboa ou remoto · Português / Inglês":"International company · Lisbon or remote · Portuguese / English","por mês · estimado":"per month · estimated","Ver vaga ↗":"View role ↗",
+        "Atendimento · Híbrido":"Customer support · Hybrid","Scale-up em expansão · Dublin, Irlanda · Inglês avançado":"Growing scale-up · Dublin, Ireland · Advanced English",
+        "Marketing · Remoto":"Marketing · Remote","Estúdio criativo · Toronto, Canadá · Inglês / Português":"Creative studio · Toronto, Canada · English / Portuguese",
+        "Operações · Presencial":"Operations · On-site","Grupo de serviços · Miami, Estados Unidos · Inglês / Português":"Services group · Miami, United States · English / Portuguese",
+        "Afora Media / Informação & inspiração":"Afora Media / Information & inspiration","Histórias que":"Stories that","abrem caminhos.":"open doors.",
+        "Conteúdo para entender novos lugares, tomar decisões melhores e enxergar possibilidades que talvez ainda não estivessem no seu radar.":"Content to understand new places, make better decisions and discover possibilities you may not have considered.",
+        "Especial Afora":"Afora feature","Guia de destinos · 8 min":"Destination guide · 8 min",
+        "Recomeçar em outro país: o que ninguém conta sobre os primeiros meses":"Starting over in another country: what no one tells you about the first few months",
+        "Um guia humano e prático para organizar a chegada, criar vínculos e construir uma nova rotina.":"A practical, human guide to planning your arrival, building connections and creating a new routine.",
+        "Por Afora Editorial · Conteúdo demonstrativo":"By Afora Editorial · Demo content","Carreira":"Career","Trabalho & carreira · 5 min":"Work & career · 5 min",
+        "Como transformar experiência internacional em diferencial profissional":"How to turn international experience into a professional advantage",
+        "Competências interculturais, repertório e novas formas de construir uma carreira.":"Cross-cultural skills, broader perspective and new ways to build a career.",
+        "Vida fora · 4 min":"Life abroad · 4 min","Pequenos encontros, grandes redes: a força de pertencer":"Small encounters, strong networks: the power of belonging",
+        "Por que criar comunidade é tão importante quanto encontrar um endereço novo.":"Why building community matters just as much as finding a new address.",
+        "O próximo capítulo é seu":"Your next chapter starts here","O mundo muda quando você encontra":"The world changes when you find","seu lugar nele.":"your place in it.",
+        "Descubra pessoas, oportunidades e possibilidades em um só ecossistema.":"Discover people, opportunities and possibilities in one connected ecosystem.",
+        "Faça parte da AforaONE":"Join AforaONE","Conectando pessoas, negócios e possibilidades pelo mundo.":"Connecting people, businesses and possibilities around the world.",
+        "Descobrir":"Discover","Destinos":"Destinations","O ecossistema":"The ecosystem","Sobre a AforaONE":"About AforaONE",
+        "Fazer parte":"Get involved","Crie sua conta":"Create your account","Para empresas":"For businesses","Publicar anúncio":"Post a listing","Fale com a gente":"Contact us",
+        "© 2026 AforaONE. Protótipo de produto — dados demonstrativos.":"© 2026 AforaONE. Product prototype — demonstration data.",
+        "Um só ecossistema.":"One ecosystem.","Sem fronteiras.":"Without borders.","Detalhes":"Details","Destino":"Destination","Valor":"Price",
+        "Dados demonstrativos":"Demonstration data","Descrição":"Description","Entrar em contato":"Contact","Voltar":"Back",
+        "A sua próxima conexão começa aqui":"Your next connection starts here","Faça parte de algo":"Be part of something","maior.":"bigger.",
+        "Este é um protótipo visual. O cadastro ainda não está conectado a um serviço real, mas você pode experimentar o fluxo demonstrativo.":"This is a visual prototype. Sign-up is not connected to a real service yet, but you can explore the demo flow.",
+        "Continuar no protótipo":"Continue in demo","Ao continuar, você verá uma confirmação de demonstração. Nenhum dado será enviado ou armazenado.":"By continuing, you'll see a demo confirmation. No data will be sent or stored.",
+        "Ação demonstrativa realizada.":"Demo action completed."
+      };
+
+      const MARKET_LABELS = {
+        all:{pt:"Todos os mercados",en:"All markets"},
+        Portugal:{pt:"Portugal",en:"Portugal"},
+        "Estados Unidos":{pt:"Estados Unidos",en:"United States"},
+        "Reino Unido":{pt:"Reino Unido",en:"United Kingdom"},
+        "Canadá":{pt:"Canadá",en:"Canada"},
+        "Irlanda":{pt:"Irlanda",en:"Ireland"},
+        "Espanha":{pt:"Espanha",en:"Spain"}
+      };
+      const CATEGORY_LABELS = {
+        Moradia:{pt:"Moradia",en:"Housing"},
+        Serviços:{pt:"Serviços",en:"Services"},
+        Produtos:{pt:"Produtos",en:"Products"},
+        Aulas:{pt:"Aulas",en:"Classes"}
+      };
+      const staticTextNodes = [];
+      const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode:function(node){
+          const parent=node.parentElement;
+          if(!parent || parent.closest("script,style,[data-pt][data-en],option")) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      while(textWalker.nextNode()) staticTextNodes.push({node:textWalker.currentNode,original:textWalker.currentNode.nodeValue});
+
+      function marketName(value){
+        const entry=MARKET_LABELS[value];
+        return entry ? entry[language] : value;
+      }
+      function categoryName(value){
+        const entry=CATEGORY_LABELS[value];
+        return entry ? entry[language] : value;
+      }
+      function countryDisplayName(code){
+        try{return new Intl.DisplayNames([language==="pt"?"pt-BR":"en"],{type:"region"}).of(code)||code}
+        catch(_){return code}
+      }
+      function readStoredValue(key){
+        try{return localStorage.getItem(key)}catch(_){return null}
+      }
+      function getCachedCountry(){
+        try{
+          const value=JSON.parse(localStorage.getItem(COUNTRY_CACHE_KEY)||"null");
+          if(value && /^[A-Z]{2}$/.test(value.code) && Date.now()-value.savedAt<43200000) return value.code;
+        }catch(_){}
+        return null;
+      }
+      function updateLocaleIndicator(){
+        const indicator=$("#localeIndicator");
+        const flag=$("#countryFlag");
+        const globe=$("#countryGlobe");
+        const name=$("#countryName");
+        if(!indicator || !flag || !globe || !name) return;
+        if(!detectedCountry){
+          flag.hidden=true;
+          globe.hidden=false;
+          name.textContent=countryResolved ? (language==="pt"?"País não detectado":"Country unavailable") : (language==="pt"?"Detectando país":"Detecting country");
+          indicator.title=language==="pt"?"País aproximado identificado pela conexão":"Approximate country detected from your connection";
+          return;
+        }
+        const label=countryDisplayName(detectedCountry);
+        flag.onerror=function(){flag.hidden=true;globe.hidden=false};
+        flag.src="https://flagcdn.com/24x18/"+detectedCountry.toLowerCase()+".png";
+        flag.alt=label;
+        flag.hidden=false;
+        globe.hidden=true;
+        name.textContent=label;
+        indicator.title=(language==="pt"?"País de acesso: ":"Access country: ")+label;
+      }
+      function setLanguage(nextLanguage,options){
+        options=options||{};
+        language=nextLanguage==="en"?"en":"pt";
+        document.documentElement.lang=language==="pt"?"pt-BR":"en";
+        $("[data-pt][data-en]").forEach(function(element){element.innerHTML=element.dataset[language]});
+        staticTextNodes.forEach(function(entry){
+          const original=entry.original;
+          const trimmed=original.trim();
+          const translated=language==="en" ? TEXT_TRANSLATIONS[trimmed] : trimmed;
+          if(translated!==undefined) entry.node.nodeValue=original.replace(trimmed,translated);
+          else entry.node.nodeValue=original;
+        });
+        $("#marketSelect option, #searchMarket option").forEach(function(option){
+          const label=MARKET_LABELS[option.value];
+          if(label) option.textContent=label[language];
+        });
+        const searchInput=$("#searchInput");
+        if(searchInput) searchInput.placeholder=language==="pt"?"Ex.: moradia, contabilidade, trabalho...":"E.g. housing, accounting, jobs...";
+        const signupName=$('#demoForm input[type="text"]');
+        const signupEmail=$('#demoForm input[type="email"]');
+        if(signupName) signupName.placeholder=language==="pt"?"Como podemos chamar você?":"What should we call you?";
+        if(signupEmail) signupEmail.placeholder=language==="pt"?"Seu melhor e-mail":"Your email address";
+        const toggle=$("#langToggle");
+        if(toggle){
+          toggle.innerHTML=language==="pt"?"PT <span>/</span> EN":"EN <span>/</span> PT";
+          toggle.setAttribute("aria-label",language==="pt"?"Mudar idioma para inglês":"Switch language to Portuguese");
+        }
+        const mobileToggle=$("#mobileToggle");
+        if(mobileToggle) mobileToggle.setAttribute("aria-label",language==="pt"?"Abrir menu":"Open menu");
+        const marketSelect=$("#marketSelect");
+        if(marketSelect) marketSelect.setAttribute("aria-label",language==="pt"?"Selecionar mercado":"Select market");
+        $('[data-close]').forEach(function(button){button.setAttribute("aria-label",language==="pt"?"Fechar":"Close")});
+        $(".favorite-btn").forEach(function(button){button.setAttribute("aria-label",language==="pt"?"Salvar anúncio":"Save listing")});
+        document.title=language==="pt"?"AforaONE — Um só ecossistema, sem fronteiras":"AforaONE — One ecosystem, without borders";
+        const description=$('meta[name="description"]');
+        if(description) description.content=language==="pt"
+          ?"AforaONE conecta pessoas, negócios, serviços, oportunidades e comunidade para brasileiros em qualquer lugar do mundo. Um só ecossistema, sem fronteiras."
+          :"AforaONE connects people, businesses, services, opportunities and community for Brazilians around the world. One ecosystem, without borders.";
+        updateLocaleIndicator();
+        if(options.persist){
+          try{localStorage.setItem(LANGUAGE_KEY,language)}catch(_){}
+        }
+        if(options.notify) notify(language==="pt"?"Idioma alterado para português.":"Language switched to English.");
+      }
+      async function detectCountry(){
+        const cached=getCachedCountry();
+        if(cached){
+          detectedCountry=cached;
+          countryResolved=true;
+          updateLocaleIndicator();
+          return;
+        }
+        try{
+          const controller=new AbortController();
+          const timeoutId=window.setTimeout(function(){controller.abort()},4000);
+          let response;
+          try{
+            response=await fetch("https://api.country.is/",{method:"GET",headers:{Accept:"application/json"},cache:"no-store",signal:controller.signal});
+          }finally{window.clearTimeout(timeoutId)}
+          if(!response.ok) throw new Error("Country lookup unavailable");
+          const result=await response.json();
+          const code=String(result.country||"").toUpperCase();
+          if(!/^[A-Z]{2}$/.test(code)) throw new Error("Invalid country code");
+          detectedCountry=code;
+          countryResolved=true;
+          try{localStorage.setItem(COUNTRY_CACHE_KEY,JSON.stringify({code:code,savedAt:Date.now()}))}catch(_){}
+          updateLocaleIndicator();
+          const override=readStoredValue(LANGUAGE_KEY);
+          setLanguage(override==="pt"||override==="en" ? override : (code==="BR"?"pt":"en"));
+        }catch(_){
+          countryResolved=true;
+          updateLocaleIndicator();
+        }
+      }
+
       const toast = $("#toast");
       let toastTimer;
       function notify(message){
@@ -668,7 +932,7 @@
       function chooseMarket(value){
         marketSelect.value=value;
         searchMarket.value=value;
-        notify(value==="all"?"Exibindo todos os mercados.":"Destino selecionado: "+value+".");
+        notify(value==="all"?(language==="pt"?"Exibindo todos os mercados.":"Showing all markets."):(language==="pt"?"Destino selecionado: "+marketName(value)+".":"Selected destination: "+marketName(value)+"."));
       }
       marketSelect.addEventListener("change",function(){searchMarket.value=marketSelect.value;});
       $$(".destination").forEach(function(card){
@@ -696,7 +960,7 @@
           card.style.display=show?"":"none";
           if(show)visible++;
         });
-        count.textContent=visible.toString().padStart(2,"0")+" resultado(s) encontrado(s)";
+        count.textContent=language==="pt"?visible.toString().padStart(2,"0")+" resultado(s) encontrado(s)":visible.toString().padStart(2,"0")+" result(s) found";
         empty.style.display=visible?"none":"block";
       }
       $$(".filter-btn").forEach(function(btn){
@@ -721,7 +985,7 @@
           event.stopPropagation();
           const saved=button.classList.toggle("saved");
           button.textContent=saved?"♥":"♡";
-          notify(saved?"Anúncio salvo na sua lista demonstrativa.":"Anúncio removido dos salvos.");
+          notify(saved?(language==="pt"?"Anúncio salvo na sua lista demonstrativa.":"Listing saved to your demo list."):(language==="pt"?"Anúncio removido dos salvos.":"Listing removed from saved items."));
         });
       });
 
@@ -741,10 +1005,10 @@
           $("#detailImage").src=image.src;
           $("#detailImage").alt=image.alt;
           $("#detailTitle").textContent=$(".listing-title",card).textContent;
-          $("#detailKicker").textContent=$(".listing-location",card).textContent+" · "+card.dataset.category;
-          $("#detailLocation").textContent=card.dataset.market;
+          $("#detailKicker").textContent=(language==="pt"?"Marketplace AforaONE":"AforaONE Marketplace")+" · "+categoryName(card.dataset.category);
+          $("#detailLocation").textContent=marketName(card.dataset.market);
           $("#detailPrice").textContent=$(".listing-price",card).innerText.replace(/\s+/g," ").trim();
-          $("#detailDescription").textContent=$(".listing-desc",card).textContent+" Este anúncio faz parte de uma demonstração de experiência e não representa uma oferta real.";
+          $("#detailDescription").textContent=$(".listing-desc",card).textContent+(language==="pt"?" Este anúncio faz parte de uma demonstração de experiência e não representa uma oferta real.":" This listing is part of a product experience demo and does not represent a real offer.");
           openModal(detailModal);
         });
       });
@@ -752,25 +1016,19 @@
         button.addEventListener("click",function(event){
           event.preventDefault();
           closeModals();
-          notify("Conexão demonstrativa — esta funcionalidade será integrada na próxima etapa.");
+          notify(language==="pt"?"Conexão demonstrativa — esta funcionalidade será integrada na próxima etapa.":"Demo connection — this feature will be integrated in a future stage.");
         });
       });
       $("#demoForm").addEventListener("submit",function(event){
         event.preventDefault();
         closeModals();
         event.target.reset();
-        notify("Perfeito! Seu cadastro de demonstração foi simulado.");
+        notify(language==="pt"?"Perfeito! Seu cadastro de demonstração foi simulado.":"All set! Your demo sign-up has been simulated.");
       });
 
-      let language="pt";
       const langToggle=$("#langToggle");
       langToggle.addEventListener("click",function(){
-        language=language==="pt"?"en":"pt";
-        document.documentElement.lang=language==="pt"?"pt-BR":"en";
-        $$("[data-pt][data-en]").forEach(function(element){element.innerHTML=element.dataset[language]});
-        $("#searchInput").placeholder=language==="pt"?"Ex.: moradia, contabilidade, trabalho...":"E.g. housing, accounting, jobs...";
-        langToggle.innerHTML=language==="pt"?"PT <span>/</span> EN":"EN <span>/</span> PT";
-        notify(language==="pt"?"Idioma alterado para português.":"Language switched to English.");
+        setLanguage(language==="pt"?"en":"pt",{persist:true,notify:true});
       });
 
       if("IntersectionObserver" in window){
@@ -779,7 +1037,16 @@
         },{threshold:.08});
         $$(".reveal").forEach(function(element){observer.observe(element)});
       }else{$$(".reveal").forEach(function(element){element.classList.add("visible")})}
+      const savedLanguage=readStoredValue(LANGUAGE_KEY);
+      const cachedCountry=getCachedCountry();
+      if(cachedCountry) detectedCountry=cachedCountry;
+      const initialLanguage=savedLanguage==="pt"||savedLanguage==="en"
+        ? savedLanguage
+        : (cachedCountry ? (cachedCountry==="BR"?"pt":"en") : (/^pt-BR$/i.test(navigator.language||"")?"pt":"en"));
+      setLanguage(initialLanguage);
+      updateLocaleIndicator();
       applyFilters();
+      detectCountry();
     })();
   </script>
 </body>

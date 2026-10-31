@@ -21,6 +21,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate inline JavaScript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          source = Path("index.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script(?:\\s[^>]*)?>(.*?)</script>", source, flags=re.DOTALL)
+          if not scripts:
+              raise SystemExit("No inline JavaScript found")
+          Path("/tmp/aforaone-inline.js").write_text("\\n;\\n".join(scripts), encoding="utf-8")
+          PY
+          node --check /tmp/aforaone-inline.js
+
+      - name: Generate social preview image
+        run: |
+          python -m venv /tmp/aforaone-build
+          /tmp/aforaone-build/bin/python -m pip install --quiet --disable-pip-version-check cairosvg
+          /tmp/aforaone-build/bin/python scripts/build-social-preview.py
+          test -s assets/aforaone-social-preview.png
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 

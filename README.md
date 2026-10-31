@@ -27,7 +27,7 @@ This repository contains the first interactive visual prototype of the product, 
 - Business directory preview
 - Opportunities list
 - Editorial / media cards
-- PT / EN interface toggle for primary navigation and hero
+- Country-aware PT-BR / EN localization: Brazil defaults to Portuguese; other countries default to English, with a manual language override and detected-country flag
 - Responsive desktop, tablet and mobile layouts
 - Demonstration sign-up and contact flows
 
@@ -71,6 +71,35 @@ If Pages has not yet been initialized for this repository, verify that **Setting
 Expected URL:
 
 `https://marciodeveloper.github.io/afora-one/`
+
+## Country-aware language and country flag
+
+The static site detects the visitor's country through the IP-to-country endpoint at `https://api.country.is/`:
+
+- Brazil (`BR`) defaults to Brazilian Portuguese (`pt-BR`).
+- Every other detected country defaults to English (`en`).
+- The country flag and localized country name appear in the header.
+- Visitors can manually switch languages; that preference is saved in local storage and takes precedence over automatic detection.
+- The detected country code is cached locally for 12 hours to avoid repeated lookups.
+- The feature does not request browser GPS permission. It makes an approximate country lookup using the visitor's public IP through the third-party API; the site does not store the IP address.
+
+If the lookup is unavailable, the interface falls back to the browser's `pt-BR` language preference or English.
+
+## Social sharing preview
+
+The page includes static Open Graph and Twitter Card metadata, plus a 1200 × 630 branded image. This enables link previews on WhatsApp, Facebook, LinkedIn and other platforms that read these metadata tags.
+
+The social preview is intentionally language-neutral in its brand identity and uses the approved Portuguese slogan: **Um só ecossistema, sem fronteiras.** Social crawlers generally read the HTML metadata without executing browser JavaScript, so the share card uses the default Portuguese metadata even when a visitor's browser interface is in English.
+
+The social preview PNG is generated from `assets/aforaone-social-preview.svg` during the GitHub Pages workflow. To generate it locally:
+
+```bash
+python -m venv .venv
+# Windows: .venv\\Scripts\\activate
+# macOS / Linux: source .venv/bin/activate
+pip install cairosvg
+python scripts/build-social-preview.py
+```
 
 ## Important: demonstration data
 
