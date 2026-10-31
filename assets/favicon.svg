@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="16" fill="#0B1F38"/>
+  <g transform="translate(9 11) scale(.19)">
+    <path d="M10 178L98 16Q103 7 109 16L236 178H207L104 52L38 178Z" fill="#F5F3EA"/>
+    <path d="M170 94L196 101L236 178H207Z" fill="#D4AF6B"/>
+    <path d="M10 178C62 134 112 101 164 94C198 89 225 99 248 118C219 110 192 107 163 111C112 117 62 145 10 178Z" fill="#D4AF6B"/>
+  </g>
+</svg>
