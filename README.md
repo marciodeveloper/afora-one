@@ -208,13 +208,13 @@ Images are loaded from Unsplash image CDN URLs. Google Fonts are loaded remotely
 
 ## Cinematic hero video
 
-The hero keeps its original AforaONE orbital composition and adds a restrained people-and-city video layer behind it. A Deep Navy overlay preserves text contrast and the approved brand palette.
+The hero keeps its original AforaONE orbital composition and adds a restrained, documentary-style people-and-city video layer behind it. The footage uses wide and high-angle compositions to avoid close-up facial and limb artifacts; the Deep Navy overlay preserves text contrast and the approved brand palette.
 
-- Desktop: landscape 1920 × 1080 city-crowd clip, 19 seconds, by Declan Conor.
-  Source: https://www.pexels.com/video/people-walking-down-a-busy-street-in-a-city-25776363/
-- Mobile: portrait 1080 × 1920 city-walk clip, 5 seconds, by Teju; selected for a lighter mobile payload.
-  Source: https://www.pexels.com/video/a-group-of-people-walking-down-a-sidewalk-in-front-of-a-building-18892665/
-- Both clips are streamed from the Pexels CDN; they are not copied into this repository.
+- Desktop: wide 3840 × 2160 city-square clip, 19 seconds, 60 FPS, by Talha Uğuz. The wider framing keeps pedestrians at a natural distance instead of emphasizing close-up faces and limbs.
+  Source: https://www.pexels.com/video/bustling-city-square-with-people-walking-34547986/
+- Mobile: portrait 2160 × 3840 high-angle urban-square clip, 9 seconds, 30 FPS, by Shruthi Pradeep. The elevated framing keeps people in context and avoids close-up motion artifacts on narrow screens.
+  Source: https://www.pexels.com/video/aerial-view-of-busy-urban-square-with-crowd-37439457/
+- Both clips are streamed from the Pexels CDN; they are not copied into this repository. The mobile source is portrait-native rather than a crop of the desktop footage.
 - The player is muted, inline, and loops without audio. It selects the landscape or portrait source at the 800px breakpoint.
 - The still poster remains visible if playback is unavailable. Video playback is skipped for reduced-motion preferences and browsers that advertise data-saving mode.
 - The videos are published under the Pexels License. Attribution is not required, but the creators and source pages are documented here. The footage is illustrative and does not imply that depicted people endorse AforaONE.
