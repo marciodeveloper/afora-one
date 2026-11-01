@@ -103,8 +103,11 @@
     .mobile-toggle{display:none;border:1px solid var(--line);background:transparent;width:42px;height:42px;border-radius:50%;color:var(--navy);font-size:20px}
     .hero{position:relative;overflow:hidden;background:var(--navy);color:var(--paper);isolation:isolate}
     .hero:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 78% 48%,rgba(40,79,111,.58),transparent 38%),radial-gradient(ellipse at 12% 100%,rgba(212,175,107,.1),transparent 42%),linear-gradient(115deg,#0B1F38 0%,#0B1F38 52%,#102945 100%)}
-    .hero:after{content:"";position:absolute;inset:0;z-index:-1;opacity:.12;background-image:linear-gradient(rgba(245,243,234,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(245,243,234,.12) 1px,transparent 1px);background-size:74px 74px;mask-image:linear-gradient(90deg,transparent,#000 60%,#000)}
-    .hero-inner{min-height:650px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:30px;padding-top:58px;padding-bottom:82px}
+    .hero:after{content:"";position:absolute;inset:0;z-index:0;opacity:.12;background-image:linear-gradient(rgba(245,243,234,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(245,243,234,.12) 1px,transparent 1px);background-size:74px 74px;mask-image:linear-gradient(90deg,transparent,#000 60%,#000)}
+    .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:var(--navy)}
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:56% center;opacity:.25;filter:saturate(.7) contrast(1.08) brightness(.82);transform:scale(1.015)}
+    .hero-video-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,31,56,.94) 0%,rgba(11,31,56,.84) 40%,rgba(11,31,56,.67) 100%),linear-gradient(180deg,rgba(11,31,56,.2),rgba(11,31,56,.42))}
+    .hero-inner{position:relative;z-index:1;min-height:650px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:30px;padding-top:58px;padding-bottom:82px}
     .hero-copy{position:relative;z-index:2;padding:24px 0 40px}
     .hero-kicker{color:var(--gold-soft);margin-bottom:28px}
     .hero h1{font-family:var(--serif);font-size:clamp(54px,6.4vw,88px);font-weight:500;letter-spacing:-.055em;line-height:.99;margin:0;max-width:650px}
@@ -131,7 +134,7 @@
     .float-stat{position:absolute;right:9%;bottom:5%;z-index:3;color:var(--paper);text-align:right}
     .float-stat strong{font-family:var(--serif);font-size:43px;line-height:1;color:var(--gold);font-weight:500;display:block}
     .float-stat span{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,243,234,.55)}
-    @keyframes orbit-drift{to{transform:rotate(360deg)}}@keyframes core-breathe{0%,100%{box-shadow:0 0 85px rgba(212,175,107,.06),inset 0 0 35px rgba(212,175,107,.04)}50%{box-shadow:0 0 125px rgba(212,175,107,.16),inset 0 0 55px rgba(212,175,107,.1)}}@keyframes card-float{0%,100%{translate:0 0}50%{translate:0 -8px}}\n    .hero-bottom{position:absolute;bottom:0;left:0;right:0;border-top:1px solid rgba(245,243,234,.12)}
+    @keyframes orbit-drift{to{transform:rotate(360deg)}}@keyframes core-breathe{0%,100%{box-shadow:0 0 85px rgba(212,175,107,.06),inset 0 0 35px rgba(212,175,107,.04)}50%{box-shadow:0 0 125px rgba(212,175,107,.16),inset 0 0 55px rgba(212,175,107,.1)}}@keyframes card-float{0%,100%{translate:0 0}50%{translate:0 -8px}}\n    .hero-bottom{position:absolute;bottom:0;left:0;right:0;z-index:1;border-top:1px solid rgba(245,243,234,.12)}
     .hero-bottom-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 0}
     .hero-bottom p{margin:0;color:rgba(245,243,234,.48);font-size:9px;letter-spacing:.16em;text-transform:uppercase}
     .hero-bottom-stats{display:flex;gap:30px}
@@ -321,6 +324,8 @@
       .nav-wrap{height:72px}.main-nav{display:none;position:absolute;top:72px;left:0;right:0;padding:18px 22px 24px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 20px 30px rgba(11,31,56,.08);flex-direction:column;align-items:flex-start;gap:19px}
       .main-nav.open{display:flex}.main-nav a{font-size:13px}
       .nav-actions .market-select{display:none}.nav-actions .lang-btn{display:inline-flex}.nav-actions>.btn{display:none}.nav-actions{gap:7px}.locale-indicator{padding:7px;gap:0}.locale-country{display:none}.mobile-toggle{display:block}
+      .hero-video{object-position:center center;opacity:.22}
+      .hero-video-shade{background:linear-gradient(180deg,rgba(11,31,56,.74) 0%,rgba(11,31,56,.84) 48%,rgba(11,31,56,.94) 100%)}
       .hero-inner{grid-template-columns:1fr;min-height:unset;padding-top:70px;padding-bottom:115px}
       .hero-copy{padding:0}.hero h1{font-size:clamp(52px,11vw,78px);max-width:600px}
       .hero-visual{height:400px;margin-top:10px}.visual-core{width:215px;height:215px}
@@ -345,6 +350,8 @@
       .container{width:calc(100% - 30px)}
       .demo-strip{font-size:8px;letter-spacing:.08em}
       .brand-mark{width:33px;height:33px}.brand-word{font-size:24px}
+      .hero-video{opacity:.2}
+      .hero-video-shade{background:linear-gradient(180deg,rgba(11,31,56,.78) 0%,rgba(11,31,56,.88) 55%,rgba(11,31,56,.96) 100%)}
       .hero-inner{padding-top:54px;padding-bottom:115px}
       .hero h1{font-size:54px}
       .hero-lead{font-size:13px;margin:22px 0 25px}
@@ -422,6 +429,11 @@
 
   <main>
     <section class="hero" id="inicio">
+      <div class="hero-media" aria-hidden="true">
+        <video id="heroVideo" class="hero-video" muted playsinline loop preload="none" tabindex="-1"
+          poster="https://images.pexels.com/videos/25776363/bicycle-city-holland-netherlands-25776363.jpeg?auto=compress&dpr=1&h=750&w=1260"></video>
+        <div class="hero-video-shade"></div>
+      </div>
       <div class="container hero-inner">
         <div class="hero-copy">
           <div class="eyebrow hero-kicker" data-pt="Um só ecossistema, sem fronteiras" data-en="One ecosystem, without borders">Um só ecossistema, sem fronteiras</div>
@@ -803,6 +815,24 @@
         try{return new Intl.DisplayNames([language==="pt"?"pt-BR":"en"],{type:"region"}).of(code)||code}
         catch(_){return code}
       }
+      function countryFlagEmoji(code){
+        return String(code||"").toUpperCase().replace(/[A-Z]/g,function(letter){
+          return String.fromCodePoint(127397+letter.charCodeAt(0));
+        });
+      }
+      function browserCountryFallback(){
+        const locales=Array.isArray(navigator.languages)&&navigator.languages.length
+          ?navigator.languages:[navigator.language||""];
+        for(const locale of locales){
+          try{
+            const region=new Intl.Locale(locale).region;
+            if(region && /^[A-Z]{2}$/.test(region)) return region.toUpperCase();
+          }catch(_){}
+          const match=String(locale).match(/[-_]([A-Za-z]{2})(?:$|[-_])/);
+          if(match) return match[1].toUpperCase();
+        }
+        return null;
+      }
       function readStoredValue(key){
         try{return localStorage.getItem(key)}catch(_){return null}
       }
@@ -821,13 +851,18 @@
         if(!indicator || !flag || !globe || !name) return;
         if(!detectedCountry){
           flag.hidden=true;
+          globe.textContent="◎";
           globe.hidden=false;
           name.textContent=countryResolved ? (language==="pt"?"País não detectado":"Country unavailable") : (language==="pt"?"Detectando país":"Detecting country");
           indicator.title=language==="pt"?"País aproximado identificado pela conexão":"Approximate country detected from your connection";
           return;
         }
         const label=countryDisplayName(detectedCountry);
-        flag.onerror=function(){flag.hidden=true;globe.hidden=false};
+        flag.onerror=function(){
+          flag.hidden=true;
+          globe.textContent=countryFlagEmoji(detectedCountry)||"◎";
+          globe.hidden=false;
+        };
         flag.src="https://flagcdn.com/24x18/"+detectedCountry.toLowerCase()+".png";
         flag.alt=label;
         flag.hidden=false;
@@ -839,7 +874,7 @@
         options=options||{};
         language=nextLanguage==="en"?"en":"pt";
         document.documentElement.lang=language==="pt"?"pt-BR":"en";
-        $("[data-pt][data-en]").forEach(function(element){element.innerHTML=element.dataset[language]});
+        selectAll("[data-pt][data-en]").forEach(function(element){element.innerHTML=element.dataset[language]});
         staticTextNodes.forEach(function(entry){
           const original=entry.original;
           const trimmed=original.trim();
@@ -847,7 +882,7 @@
           if(translated!==undefined) entry.node.nodeValue=original.replace(trimmed,translated);
           else entry.node.nodeValue=original;
         });
-        $("#marketSelect option, #searchMarket option").forEach(function(option){
+        selectAll("#marketSelect option, #searchMarket option").forEach(function(option){
           const label=MARKET_LABELS[option.value];
           if(label) option.textContent=label[language];
         });
@@ -866,8 +901,8 @@
         if(mobileToggle) mobileToggle.setAttribute("aria-label",language==="pt"?"Abrir menu":"Open menu");
         const marketSelect=$("#marketSelect");
         if(marketSelect) marketSelect.setAttribute("aria-label",language==="pt"?"Selecionar mercado":"Select market");
-        $('[data-close]').forEach(function(button){button.setAttribute("aria-label",language==="pt"?"Fechar":"Close")});
-        $(".favorite-btn").forEach(function(button){button.setAttribute("aria-label",language==="pt"?"Salvar anúncio":"Save listing")});
+        selectAll("[data-close]").forEach(function(button){button.setAttribute("aria-label",language==="pt"?"Fechar":"Close")});
+        selectAll(".favorite-btn").forEach(function(button){button.setAttribute("aria-label",language==="pt"?"Salvar anúncio":"Save listing")});
         document.title=language==="pt"?"AforaONE — Um só ecossistema, sem fronteiras":"AforaONE — One ecosystem, without borders";
         const description=$('meta[name="description"]');
         if(description) description.content=language==="pt"
@@ -905,10 +940,65 @@
           const override=readStoredValue(LANGUAGE_KEY);
           setLanguage(override==="pt"||override==="en" ? override : (code==="BR"?"pt":"en"));
         }catch(_){
+          const fallbackCountry=browserCountryFallback();
           countryResolved=true;
-          updateLocaleIndicator();
+          if(fallbackCountry){
+            detectedCountry=fallbackCountry;
+            const override=readStoredValue(LANGUAGE_KEY);
+            setLanguage(override==="pt"||override==="en" ? override : (fallbackCountry==="BR"?"pt":"en"));
+          }else{
+            updateLocaleIndicator();
+          }
         }
       }
+
+      const HERO_VIDEO_SOURCES={
+        desktop:{
+          src:"https://videos.pexels.com/video-files/25776363/11908139_1920_1080_25fps.mp4",
+          poster:"https://images.pexels.com/videos/25776363/bicycle-city-holland-netherlands-25776363.jpeg?auto=compress&dpr=1&h=750&w=1260"
+        },
+        mobile:{
+          src:"https://videos.pexels.com/video-files/5636780/5636780-uhd_2160_3840_24fps.mp4",
+          poster:"https://images.pexels.com/videos/5636780/pexels-photo-5636780.jpeg?auto=compress&dpr=1&h=750&w=1260"
+        }
+      };
+      function configureHeroVideo(){
+        const video=$("#heroVideo");
+        if(!video) return;
+        const isMobile=window.matchMedia("(max-width: 800px)").matches;
+        const selected=isMobile?HERO_VIDEO_SOURCES.mobile:HERO_VIDEO_SOURCES.desktop;
+        video.poster=selected.poster;
+        const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+        const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if(reducedMotion || (connection&&connection.saveData)){
+          video.pause();
+          video.removeAttribute("src");
+          video.dataset.activeSource="";
+          video.load();
+          return;
+        }
+        if(video.dataset.activeSource===selected.src) return;
+        video.pause();
+        video.dataset.activeSource=selected.src;
+        video.addEventListener("canplay",function(){
+          video.play().catch(function(){video.classList.add("video-paused")});
+        },{once:true});
+        video.addEventListener("error",function(){video.classList.add("video-unavailable")},{once:true});
+        video.src=selected.src;
+        video.load();
+      }
+      const heroViewport=window.matchMedia("(max-width: 800px)");
+      if(heroViewport.addEventListener) heroViewport.addEventListener("change",configureHeroVideo);
+      else if(heroViewport.addListener) heroViewport.addListener(configureHeroVideo);
+      configureHeroVideo();
+      document.addEventListener("visibilitychange",function(){
+        const video=$("#heroVideo");
+        if(!video) return;
+        if(document.hidden) video.pause();
+        else if(video.currentSrc && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+          video.play().catch(function(){});
+        }
+      });
 
       const toast = $("#toast");
       let toastTimer;
