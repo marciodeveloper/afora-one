@@ -212,8 +212,8 @@ The hero keeps its original AforaONE orbital composition and adds a restrained p
 
 - Desktop: landscape 1920 × 1080 city-crowd clip, 19 seconds, by Declan Conor.
   Source: https://www.pexels.com/video/people-walking-down-a-busy-street-in-a-city-25776363/
-- Mobile: portrait 2160 × 3840 street-conversation clip, 10 seconds, by Sora Shimazaki.
-  Source: https://www.pexels.com/video/people-talking-on-the-street-5636780/
+- Mobile: portrait 1080 × 1920 city-walk clip, 5 seconds, by Teju; selected for a lighter mobile payload.
+  Source: https://www.pexels.com/video/a-group-of-people-walking-down-a-sidewalk-in-front-of-a-building-18892665/
 - Both clips are streamed from the Pexels CDN; they are not copied into this repository.
 - The player is muted, inline, and loops without audio. It selects the landscape or portrait source at the 800px breakpoint.
 - The still poster remains visible if playback is unavailable. Video playback is skipped for reduced-motion preferences and browsers that advertise data-saving mode.
