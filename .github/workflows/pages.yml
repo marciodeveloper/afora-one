@@ -27,11 +27,14 @@ jobs:
           from pathlib import Path
           import re
 
-          source = Path("index.html").read_text(encoding="utf-8")
-          scripts = re.findall(r"<script[^>]*>(.*?)</script>", source, flags=re.DOTALL)
-          if not scripts:
-              raise SystemExit("No inline JavaScript found")
-          Path("/tmp/aforaone-inline.js").write_text("\n;\n".join(scripts), encoding="utf-8")
+          chunks = []
+          for page in ("index.html", "founding-partners.html"):
+              source = Path(page).read_text(encoding="utf-8")
+              scripts = re.findall(r"<script[^>]*>(.*?)</script>", source, flags=re.DOTALL)
+              if page == "index.html" and not scripts:
+                  raise SystemExit("No inline JavaScript found in index.html")
+              chunks.extend(scripts)
+          Path("/tmp/aforaone-inline.js").write_text("\n;\n".join(chunks), encoding="utf-8")
           PY
           node --check /tmp/aforaone-inline.js
 
@@ -42,13 +45,46 @@ jobs:
           /tmp/aforaone-build/bin/python scripts/build-social-preview.py
           test -s assets/aforaone-social-preview.png
 
+      - name: Stage and validate public Pages artifact
+        run: |
+          rm -rf /tmp/aforaone-site
+          mkdir -p /tmp/aforaone-site/assets
+          cp .nojekyll index.html founding-partners.html /tmp/aforaone-site/
+          cp assets/favicon.svg assets/aforaone-symbol.svg assets/aforaone-social-preview.svg assets/aforaone-social-preview.png /tmp/aforaone-site/assets/
+          rm -f assets/aforaone-social-preview.png
+          python - <<'PY'
+          from pathlib import Path
+
+          root = Path("/tmp/aforaone-site")
+          expected = {
+              ".nojekyll",
+              "index.html",
+              "founding-partners.html",
+              "assets/aforaone-social-preview.png",
+              "assets/aforaone-social-preview.svg",
+              "assets/aforaone-symbol.svg",
+              "assets/favicon.svg",
+          }
+          actual = {
+              str(p.relative_to(root).as_posix())
+              for p in root.rglob("*")
+              if p.is_file()
+          }
+          if actual != expected:
+              raise SystemExit(f"Unexpected artifact contents: {sorted(actual)} != {sorted(expected)}")
+          for rel in expected - {".nojekyll"}:
+              if (root / rel).stat().st_size <= 0:
+                  raise SystemExit(f"Empty required file in artifact: {rel}")
+          print("Validated public Pages artifact:", sorted(actual))
+          PY
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
+          path: "/tmp/aforaone-site"
 
   deploy:
     environment:

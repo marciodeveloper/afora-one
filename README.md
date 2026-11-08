@@ -64,13 +64,14 @@ Then visit `http://localhost:8080`.
 
 ## GitHub Pages
 
-The workflow at `.github/workflows/pages.yml` publishes the static site from the repository root when changes are pushed to `main`.
+The workflow at `.github/workflows/pages.yml` stages and publishes only the public static artifact (`index.html`, `founding-partners.html`, `assets/` and `.nojekyll`) when changes are pushed to `main`.
 
 If Pages has not yet been initialized for this repository, verify that **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**.
 
-Expected URL:
+Expected URLs:
 
-`https://marciodeveloper.github.io/afora-one/`
+- `https://marciodeveloper.github.io/afora-one/`
+- `https://marciodeveloper.github.io/afora-one/founding-partners.html`
 
 ## Country-aware language and country flag
 
@@ -79,94 +80,13 @@ The static site detects the visitor's country through the IP-to-country endpoint
 - Brazil (`BR`) defaults to Brazilian Portuguese (`pt-BR`).
 - Every other detected country defaults to English (`en`).
 - The country flag and localized country name appear in the header.
-- Brazil (`BR`) defaults to Brazilian Portuguese; every other detected country defaults to English.
 - Visitors can manually switch languages; that preference is saved in local storage and takes precedence over automatic detection.
 - The detected country code is cached locally for 12 hours to avoid repeated lookups.
 - The feature does not request browser GPS permission. It makes an approximate country lookup using the visitor's public IP through the third-party API; the site does not store the IP address.
 - If the IP lookup is unavailable, the browser locale region (for example, `en-US` or `pt-BR`) is used as a best-effort fallback.
 - Flag images are loaded from FlagCDN; if that image cannot load, a Unicode flag emoji is used as a fallback.
 
-A previous selector mismatch caused the localization routine to stop before country detection could run. Multi-element operations now use the shared `selectAll()` helper, while single-element lookups continue to use `# AforaONE — Global Ecosystem Prototype
-
-**Um só ecossistema, sem fronteiras.**
-
-AforaONE is a global platform concept for Brazilians living abroad. It brings people, businesses, services, opportunities and community together in one connected experience.
-
-This repository contains the first interactive visual prototype of the product, designed for GitHub Pages.
-
-## Product pillars
-
-| Pillar | Purpose |
-| --- | --- |
-| Marketplace | Buy, sell, donate, discover housing and find services |
-| Community | Groups, conversations, local knowledge and belonging |
-| Business | Brazilian-owned businesses and independent professionals around the world |
-| Opportunities | Jobs, projects and professional connections |
-| Afora Media | Guides, information, culture and stories |
-
-## Prototype experience
-
-- Global discovery homepage with country/market context
-- Market selector and destination exploration
-- Search and category filters for sample listings
-- Listing detail modal
-- Save/favorite interactions
-- Community feed preview
-- Business directory preview
-- Opportunities list
-- Editorial / media cards
-- Country-aware PT-BR / EN localization: Brazil defaults to Portuguese; other countries default to English, with a manual language override and detected-country flag
-- Responsive desktop, tablet and mobile layouts
-- Demonstration sign-up and contact flows
-
-## Brand system
-
-| Token | Value | Usage |
-| --- | --- | --- |
-| Deep Navy | `#0B1F38` | Primary brand foundation |
-| Graphite | `#2C2F35` | Secondary dark neutral |
-| Off-white | `#F5F3EA` | Main canvas and light typography |
-| Champagne Gold | `#D4AF6B` | Accent, horizon and emphasis |
-
-Typography:
-- **Playfair Display** — expressive editorial headlines and wordmark direction
-- **DM Sans** — interface, body copy and navigation
-- **Manrope** — supporting UI/system typography
-
-The AforaONE symbol is a geometric A with a golden horizon arc. The visual language is premium, contemporary, international and welcoming. It intentionally avoids generic travel iconography.
-
-## Run locally
-
-No build step or package installation is required.
-
-1. Clone the repository.
-2. Open `index.html` in a browser, or serve the root folder with any static HTTP server.
-
-Example:
-
-```bash
-python -m http.server 8080
-```
-
-Then visit `http://localhost:8080`.
-
-## GitHub Pages
-
-The workflow at `.github/workflows/pages.yml` publishes the static site from the repository root when changes are pushed to `main`.
-
-If Pages has not yet been initialized for this repository, verify that **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**.
-
-Expected URL:
-
-`https://marciodeveloper.github.io/afora-one/`
-
-## Country-aware language and country flag
-
-The static site detects the visitor's country through the IP-to-country endpoint at `https://api.country.is/`:
-
-- Brazil (`BR`) defaults to Brazilian Portuguese (`pt-BR`).
-- Every other detected country defaults to English (`en`).
-.
+A previous selector mismatch caused the localization routine to stop before country detection could run. Multi-element operations now use the shared `selectAll()` helper, while single-element lookups continue to use `$()`.
 
 ## Social sharing preview
 
